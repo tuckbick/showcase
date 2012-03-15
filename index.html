@@ -1,0 +1,72 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Impress Q*bert</title>
+    
+    <meta name="description" content="" />
+    <meta name="author" content="Tucker Bickler" />
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+    <link href="css/impress-demo.css" rel="stylesheet" />
+    
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+
+<body class="impress-not-supported">
+
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress">
+
+    <div id="home" class="step slide r"      data-x="0"   data-y="0"   data-z="0"   data-rotate-x="0"  data-rotate-y="0"   data-rotate-z="0">
+        <q>ONE</q>
+    </div>
+
+    <div id="resume" class="step slide g"    data-x="450" data-y="0"   data-z="450" data-rotate-x="0"  data-rotate-y="-90" data-rotate-z="0">
+        <q>TWO</q>
+    </div>
+
+    <div id="projects" class="step slide b"  data-x="0"   data-y="450" data-z="450" data-rotate-x="90" data-rotate-y="0"   data-rotate-z="0">
+        <q>THREE</q>
+    </div>
+
+    <div id="victr" class="step slide r"     data-x="900"   data-y="0"   data-z="900"   data-rotate-x="0"  data-rotate-y="0"   data-rotate-z="0">
+        <q>FOUR</q>
+    </div>
+
+    <div id="clipp" class="step slide b"     data-x="900"   data-y="-450" data-z="450" data-rotate-x="90" data-rotate-y="0"   data-rotate-z="0">
+        <q>FIVE</q>
+    </div>
+
+    <div id="twitt" class="step slide b"     data-x="900"   data-y="450" data-z="1350" data-rotate-x="90" data-rotate-y="0"   data-rotate-z="0">
+        <q>SIX</q>
+    </div>
+
+    <div id="tools" class="step slide g"    data-x="1350" data-y="0"   data-z="1350" data-rotate-x="0"  data-rotate-y="-90" data-rotate-z="0">
+        <q>SEVEN</q>
+    </div>
+
+    <div id="map2" class="step" data-x="1272.792" data-y="0" data-z="0" data-rotate-x="0" data-rotate-y="-45" data-rotate-z="0" data-scale="4">
+    </div>
+<!-- 1272.792 -->
+</div>
+
+<script>
+if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+<script src="js/impress.js"></script>
+<script>impress();</script>
+
+</body>
+</html>
