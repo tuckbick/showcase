@@ -54,10 +54,6 @@
     var arrayify = function ( a ) {
         return [].slice.call( a );
     };
-
-    var getViewport = function() {
-
-    };
     
     var css = function ( el, props ) {
         var key, pkey;
@@ -145,83 +141,6 @@
         
         transitionDuration: 1000
     };
-
-    var qbert = window.qbert = (function () { var
-
-        // width and height of our cubes
-        width, height,
-
-        level = 0,
-
-        cube = 0,
-        rowCubes = 0,
-
-        step = 0,
-
-        // angles for each type of step
-           faceUP = { x: 90, y:   0, z: 0 },
-         faceLEFT = { x:  0, y: -90, z: 0 },
-        faceRIGHT = { x:  0, y:   0, z: 0 },
-
-        // we need the dimensions of each step so we can configure our pyramid cubes
-        setUnits = function ( w, h ) {
-            width = w;
-            height = h;
-        },
-        nextCoords = function () {
-            console.log(step);
-            switch (step % 3) {
-                case 0:
-                    return [ upCoords(), faceUP ];
-                case 1:
-                    return [ leftCoords(), faceLEFT ];
-                case 2:
-                    return [ rightCoords(), faceRIGHT ];
-            }
-        },
-        upCoords = function () {
-            step += 1;
-            return {
-                x: -1 * (level - rowCubes) * width,
-                y: level * width,
-                z: rowCubes * width
-            }
-        },
-        leftCoords = function () {
-            step += 1;
-            return {
-                x: -1 * (width/2) - (level - rowCubes) * width ,
-                y: (width/2) + level * width,
-                z: rowCubes * width,
-            }
-        },
-        rightCoords = function () {
-            step += 1;
-            console.log(level, rowCubes);
-            var coords = {
-                x: -1 * (level - rowCubes) * width,
-                y: (width/2) + level * width,
-                z: (width/2) + rowCubes * width,
-            };
-
-            rowCubes += 1;
-            if (rowCubes > level) {
-                rowCubes = 0;
-                level += 1;
-            }
-
-            return coords;
-        },
-        reset = function () {
-
-        };
-
-        return {
-            setUnits: setUnits,
-            nextCoords: nextCoords,
-            reset: reset
-        }
-    })();
     
     var impress = window.impress = function ( rootId ) {
         
@@ -253,8 +172,8 @@
         // initialize configuration object
         var rootData = root.dataset;
         var config = {
-            width: window.innerWidth, //toNumber(rootData.width,    defaults.width),
-            height: window.innerHeight, //toNumber(rootData.height,   defaults.height),
+            width: toNumber(rootData.width,    defaults.width),
+            height: toNumber(rootData.height,   defaults.height),
             maxScale: toNumber(rootData.maxScale, defaults.maxScale),
             minScale: toNumber(rootData.minScale, defaults.minScale),
             
@@ -262,7 +181,6 @@
             
             transitionDuration: toNumber(rootData.transitionDuration, defaults.transitionDuration)
         };
-        qbert.setUnits(config.width, config.height);
         
         var canvas = document.createElement("div");
         canvas.className = "canvas";
@@ -343,16 +261,14 @@
                     scale: toNumber(data.scale, 1),
                     el: el
                 };
-
+            
             if ( !el.id ) {
                 el.id = "step-" + (idx + 1);
             }
             
             stepData["impress-" + el.id] = step;
-
+            
             css(el, {
-                height: config.height + "px",
-                width: config.width + "px",
                 position: "absolute",
                 transform: "translate(-50%,-50%)" +
                            translate(step.translate) +
@@ -466,23 +382,6 @@
             
             return stepTo(next);
         };
-
-        var resizeSteps = function() {
-            config.width = window.innerWidth;
-            config.height = window.innerHeight;
-            qbert.setUnits(config.width, config.height);
-            steps.forEach(function ( el, idx ) {
-                css(el, {
-                    height: config.height + "px",
-                    width: config.width + "px",
-                });
-            });
-        };
-
-        var onResize = function() {
-            resizeSteps();
-            stepTo( document.querySelector(".active"), true );
-        };
         
         window.addEventListener("hashchange", function () {
             stepTo( getElementFromUrl() );
@@ -499,8 +398,7 @@
         return (roots[ "impress-root-" + rootId ] = {
             stepTo: stepTo,
             next: next,
-            prev: prev,
-            onResize: onResize
+            prev: prev
         });
 
     };
@@ -624,6 +522,8 @@
     }, false);
     
     // rescale presentation when window is resized
-    window.addEventListener("resize", throttle(impress().onResize, 250), false);
-
+    window.addEventListener("resize", throttle(function () {
+        // force going to active step again, to trigger rescaling
+        impress().stepTo( document.querySelector(".active"), true );
+    }, 250), false);
 })(document, window);
