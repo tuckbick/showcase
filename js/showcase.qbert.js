@@ -40,7 +40,7 @@
             }
         },
 
-        // HELPER FUNCTIONS
+        // HELPER FUNCTIONS FOR THEME
         upData = function () {
             step += 1;
             return {
