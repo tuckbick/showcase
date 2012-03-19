@@ -3,9 +3,9 @@
 
     var qbert = window.qbert = (function () { var
 
-        // width and height of our cubes
+        // width of our cubes and the top and bottom margin caused by our screen dimensions
         width,
-        height,
+        margin,
 
         level = 0,
 
@@ -14,10 +14,14 @@
 
         step = 0,
 
+        setup = function(steps, css) {
+
+        },
+
         // we need the dimensions of each step so we can configure our pyramid cubes
         onResize = function () {
-            width =  window.innerWidth;
-            height = window.innerHeight;
+            width = window.innerWidth;
+            margin = (width - window.innerHeight)/2;
         },
         nextData = function () {
             switch (step % 3) {
@@ -34,7 +38,7 @@
             return {
                 rotateX: 90, rotateY: 0, rotateZ: 0,
                 x: -1 * (level - rowCubes) * width,
-                y: level * height,
+                y: level * width,
                 z: rowCubes * width
             }
         },
@@ -43,7 +47,7 @@
             return {
                 rotateX: 0, rotateY: -90, rotateZ: 0,
                 x: -1 * (width/2) - (level - rowCubes) * width ,
-                y: (height/2) + level * height,
+                y: (width/2) + level * width,
                 z: rowCubes * width,
             }
         },
@@ -52,7 +56,7 @@
             var coords = {
                 rotateX: 0, rotateY: 0, rotateZ: 0,
                 x: -1 * (level - rowCubes) * width,
-                y: (height/2) + level * height,
+                y: (width/2) + level * width,
                 z: (width/2) + rowCubes * width,
             };
 
@@ -63,16 +67,12 @@
             }
 
             return coords;
-        },
-        reset = function () {
-
-        };
+        }
 
         return {
               nextData: nextData
-            , reset: reset
             , width: function() { return width }
-            , height: function() { return height }
+            , margin: function() { return margin }
             , onResize: onResize
         }
     })();

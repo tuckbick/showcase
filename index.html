@@ -97,7 +97,7 @@
         TEN UP
     </div> -->
 
-    <div id="map" class="step" data-x="0" data-y="300" data-z="0" data-rotate-x="0" data-rotate-y="-45" data-rotate-z="0" data-scale="12">
+    <div id="map" class="step" data-x="0" data-y="300" data-z="0" data-rotate-x="0" data-rotate-y="-45" data-rotate-z="0" data-scale="4">
     </div>
 
 </div>
@@ -107,9 +107,12 @@ if ("ontouchstart" in document.documentElement) {
     document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
 }
 </script>
+<script src="js/impress.plugin.js"></script>
 <script src="js/showcase.js"></script>
 <script src="js/showcase.qbert.js"></script>
-<script>impress('impress', qbert);</script>
+<script>
+    impress('impress', showcase(qbert))
+</script>
 
 </body>
 </html>
