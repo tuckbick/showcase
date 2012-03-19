@@ -1,0 +1,75 @@
+1a2,19
+>  * Showcase is a website design tool based on the power of impress.js
+>  *
+>  * built upon impress.js by Bartek Szopka
+>  * (see his original credits below mine)
+>  * 
+>  * see the included diff for changes from impress.js v0.4.1
+>  *
+>  * Copyright 2012 Tucker Bickler (@tuckbick)
+>  *
+>  * Released under the MIT and GPL Licenses.
+>  *
+>  * ------------------------------------------------
+>  *  author:  Tucker Bickler
+>  *  version: 0.1
+>  *  source:  https://github.com/tuckbick/Impress-Q-bert
+>  *
+>  *
+>  * ------------------------------------------------
+145c163
+<     var impress = window.impress = function ( rootId ) {
+---
+>     var impress = window.impress = function ( rootId, plugin ) {
+156a175,177
+> 
+>         // give our plugin the functions used by impress
+>         plugin.library( css, toNumber, translate, rotate, scale );
+225,226d245
+< 
+<         var stepData = {};
+247,280c266,267
+<         
+<         steps.forEach(function ( el, idx ) {
+<             var data = el.dataset,
+<                 step = {
+<                     translate: {
+<                         x: toNumber(data.x),
+<                         y: toNumber(data.y),
+<                         z: toNumber(data.z)
+<                     },
+<                     rotate: {
+<                         x: toNumber(data.rotateX),
+<                         y: toNumber(data.rotateY),
+<                         z: toNumber(data.rotateZ || data.rotate)
+<                     },
+<                     scale: toNumber(data.scale, 1),
+<                     el: el
+<                 };
+<             
+<             if ( !el.id ) {
+<                 el.id = "step-" + (idx + 1);
+<             }
+<             
+<             stepData["impress-" + el.id] = step;
+<             
+<             css(el, {
+<                 position: "absolute",
+<                 transform: "translate(-50%,-50%)" +
+<                            translate(step.translate) +
+<                            rotate(step.rotate) +
+<                            scale(step.scale),
+<                 transformStyle: "preserve-3d"
+<             });
+<             
+<         });
+---
+> 
+>         var stepData = plugin.setup( steps );
+401c388,389
+<             prev: prev
+---
+>             prev: prev,
+>             pluginOnResize: plugin.onResize
+525a514
+>         impress().pluginOnResize()

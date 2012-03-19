@@ -4,25 +4,31 @@
     var qbert = window.qbert = (function () { var
 
         // width of our cubes and the top and bottom margin caused by our screen dimensions
-        width,
-        margin,
+        width, padding, level, cube, rowCubes, step,
 
-        level = 0,
-
-        cube = 0,
-        rowCubes = 0,
-
-        step = 0,
-
-        setup = function(steps, css) {
-
+        css,
+        library = function ( _css ) {
+            css = _css;
         },
 
-        // we need the dimensions of each step so we can configure our pyramid cubes
-        onResize = function () {
+        // API FUNCTIONS TO BE FILLED OUT
+        getStepStyles = function ( step ) {
+            return {
+                width: width + 'px',
+                height: width + 'px',
+                padding: padding + 'px 0'
+            }
+        },
+
+        restart = function ( ) {
             width = window.innerWidth;
-            margin = (width - window.innerHeight)/2;
+            padding = (width - window.innerHeight)/2;
+            level = 0;
+            cube = 0;
+            rowCubes = 0;
+            step = 0;
         },
+
         nextData = function () {
             switch (step % 3) {
                 case 0:
@@ -33,6 +39,8 @@
                     return rightData();
             }
         },
+
+        // HELPER FUNCTIONS
         upData = function () {
             step += 1;
             return {
@@ -69,11 +77,14 @@
             return coords;
         }
 
+        // Kick it off by initializing some of our variables
+        restart();
+
         return {
-              nextData: nextData
-            , width: function() { return width }
-            , margin: function() { return margin }
-            , onResize: onResize
+              library: library
+            , getStepStyles: getStepStyles
+            , restart: restart
+            , nextData: nextData
         }
     })();
 

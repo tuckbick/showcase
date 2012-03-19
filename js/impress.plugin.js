@@ -150,8 +150,8 @@
     var roots = {};
     
     var defaults = {
-        width: 1024,
-        height: 768,
+        width: 0,
+        height: 0,
         maxScale: 1,
         minScale: 0,
         
@@ -385,7 +385,8 @@
         return (roots[ "impress-root-" + rootId ] = {
             stepTo: stepTo,
             next: next,
-            prev: prev
+            prev: prev,
+            pluginOnResize: plugin.onResize
         });
 
     };
@@ -510,6 +511,7 @@
     
     // rescale presentation when window is resized
     window.addEventListener("resize", throttle(function () {
+        impress().pluginOnResize()
         // force going to active step again, to trigger rescaling
         impress().stepTo( document.querySelector(".active"), true );
     }, 250), false);
