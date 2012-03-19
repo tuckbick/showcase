@@ -1,8 +1,5 @@
 /**
- * Showcase is a website design tool based on the power of impress.js
- *
- * built upon impress.js by Bartek Szopka
- * (see his original credits below mine)
+ * Showcase is a website design tool built upon impress.js by Bartek Szopka (see his original credits below mine)
  * 
  * see the included diff for changes from impress.js v0.4.1
  *
@@ -16,7 +13,7 @@
  *  source:  https://github.com/tuckbick/Impress-Q-bert
  *
  *
- * ------------------------------------------------
+ * ================================================
  * impress.js
  *
  * impress.js is a presentation tool based on the power of CSS3 transforms and transitions

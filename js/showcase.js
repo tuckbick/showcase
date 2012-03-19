@@ -8,7 +8,7 @@
         // checks to see if dom el.dataset has any of these properties.
         //    if not, then it's probably just a blank step and is using the plugin
         isDatasetEmpty = function ( d ) {
-            return !(d.x || d.y || d.z || d.rotateX || d.rotateY || d.rotateZ || d.rotate || d.scale)
+            return !(d.x || d.y || d.z || d.rotateX || d.rotateY || d.rotateZ || d.rotate || d.scale);
         },
 
         // bring in some impress.js functions
@@ -36,7 +36,7 @@
                 scale: toNumber(data.scale, 1),
                 el: el,
                 usesPlugin: usesPlugin
-            }
+            };
         },
 
         // used every time we kick off the page and we do a resize of the window
@@ -44,7 +44,7 @@
             theme.restart();
             for ( var step_name in stepData ) {
                 var step = stepData[step_name];
-                if (!step.usesPlugin) continue;
+                if (!step.usesPlugin) { continue; }
                 stepData[step_name] = step = createStep( theme.nextData(), step.el, step.usesPlugin );
                 css( step.el, getStepStyles( step ));
             }
@@ -59,8 +59,8 @@
                            translate(step.translate) +
                            rotate(step.rotate) +
                            scale(step.scale),
-                transformStyle: "preserve-3d",
-            }
+                transformStyle: "preserve-3d"
+            };
             if (step.usesPlugin) {
                 // bring in any custom styles from the theme and overwrite if necessary
                 var more_style = theme.getStepStyles( step );
@@ -79,7 +79,7 @@
                     usesPlugin = isDatasetEmpty(data);
                 
                 // ask our theme for the next set of step data
-                if (usesPlugin) { data = theme.nextData() }
+                if (usesPlugin) { data = theme.nextData(); }
 
                 // build a step object 
                 var step = createStep( data, el, usesPlugin );
@@ -95,14 +95,14 @@
                 css( el, getStepStyles( step ));
             });
 
-            return stepData
-        }
+            return stepData;
+        };
 
         return {
             library: library,
             setup: setup,
             onResize: applyStyles
-        }
+        };
 
     };
 
